@@ -26,7 +26,7 @@ final class CharacterCollectionCell: UICollectionViewCell {
         addSubview(icon)
         icon.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            icon.widthAnchor.constraint(equalToConstant: 100),
+            icon.widthAnchor.constraint(equalToConstant: 120),
             icon.topAnchor.constraint(equalTo: topAnchor),
             icon.bottomAnchor.constraint(equalTo: bottomAnchor),
             icon.leftAnchor.constraint(equalTo: leftAnchor),
@@ -56,7 +56,10 @@ final class CharacterTableCell: UITableViewCell {
     
     struct Model {
         let imageurls: [URL]
+        let controller: UIViewController
     }
+    
+    var controller: UIViewController?
     
     static let identifier = "CharacterTableCell"
     
@@ -66,11 +69,12 @@ final class CharacterTableCell: UITableViewCell {
 
     func update(_ model: Model) {
         self.imagesurls = model.imageurls
+        self.controller = model.controller
         collectionView.reloadData()
     }
     
     private lazy var collectionView: UICollectionView = {
-        contentView.isUserInteractionEnabled = false
+        contentView.isUserInteractionEnabled = true
         let uv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         let layout = UICollectionViewFlowLayout()
         uv.translatesAutoresizingMaskIntoConstraints = false
@@ -81,16 +85,17 @@ final class CharacterTableCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        addSubview(collectionView)
+        
+        contentView.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 160)
+            heightAnchor.constraint(equalToConstant: 200),
+            contentView.heightAnchor.constraint(equalToConstant: 200)
         ])
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            collectionView.leftAnchor.constraint(equalTo: leftAnchor),
-            collectionView.rightAnchor.constraint(equalTo: rightAnchor)
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
         ])
         collectionView.register(CharacterCollectionCell.self, forCellWithReuseIdentifier: CharacterCollectionCell.identifier)
     }
@@ -112,17 +117,26 @@ extension CharacterTableCell: UICollectionViewDataSource {
     }
 }
 
-extension CharacterTableCell: UICollectionViewDelegate {
 
+
+extension CharacterTableCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = CharacterViewController(model: CharacterViewController.Model(imageURL: imagesurls[indexPath.row]))
+        vc.modalPresentationStyle = .overFullScreen
+        controller?.navigationController?.pushViewController(vc, animated: true)
+        controller?.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 }
 
 extension CharacterTableCell: UICollectionViewDelegateFlowLayout {
     override func layoutSubviews() {
+        super.layoutSubviews()
         collectionViewLayout.scrollDirection = .horizontal
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 16, bottom: 23, right: 0))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width:  100, height: collectionView.frame.height)
+        return CGSize(width:  120, height: collectionView.frame.height)
     }
 }
 

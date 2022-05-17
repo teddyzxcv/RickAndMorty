@@ -11,7 +11,9 @@ import UIKit
 class SearchTableViewController: UIViewController {
     let tableView: UITableView = UITableView()
     override func viewDidLoad() {
+        tableView.separatorColor = .main
         view.addSubview(tableView)
+        view.backgroundColor = .bg
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -19,9 +21,15 @@ class SearchTableViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
+        tableView.backgroundColor = .bg
         tableView.register(CharacterTableCell.self, forCellReuseIdentifier: CharacterTableCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+
     }
 }
 
@@ -31,7 +39,7 @@ extension SearchTableViewController: UITableViewDelegate{
 
 extension SearchTableViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +49,8 @@ extension SearchTableViewController: UITableViewDataSource{
             images.append(URL(string:"https://rickandmortyapi.com/api/character/avatar/\(i + indexPath.row * 10).jpeg")!)
         }
         cell.update(CharacterTableCell.Model(
-            imageurls: images
+            imageurls: images,
+            controller: self
         ))
         return cell
     }

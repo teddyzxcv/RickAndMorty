@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D088D24282C25EC00BD70DC /* RootViewController.swift */; };
+		6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F442833EC8000141CB1 /* FavouriteViewController.swift */; };
 		6D84B163281860B100B63912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B162281860B100B63912 /* AppDelegate.swift */; };
 		6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B164281860B100B63912 /* SceneDelegate.swift */; };
 		6D84B16C281860B200B63912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D84B16B281860B200B63912 /* Assets.xcassets */; };
@@ -17,9 +19,15 @@
 		6D84B1822818623B00B63912 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B1812818623B00B63912 /* Colors.swift */; };
 		6D84B1862818635900B63912 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B1852818635900B63912 /* SearchTableViewController.swift */; };
 		6D84B1882818655100B63912 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B1872818655100B63912 /* SearchTableView.swift */; };
+		6DB432DE2832BEDC00333DAC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB432DD2832BEDC00333DAC /* MainViewController.swift */; };
+		6DB432EB2832C1DE00333DAC /* sf-ui-display-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB432E62832C1CE00333DAC /* sf-ui-display-black.otf */; };
+		6DB432EF2832C1DE00333DAC /* sf-ui-display-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB432E72832C1CE00333DAC /* sf-ui-display-bold.otf */; };
+		6DB432F128331B5D00333DAC /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB432F028331B5D00333DAC /* CharacterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D088D24282C25EC00BD70DC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		6D671F442833EC8000141CB1 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		6D84B15F281860B100B63912 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D84B162281860B100B63912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D84B164281860B100B63912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +39,10 @@
 		6D84B1812818623B00B63912 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6D84B1852818635900B63912 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		6D84B1872818655100B63912 /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
+		6DB432DD2832BEDC00333DAC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		6DB432E62832C1CE00333DAC /* sf-ui-display-black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-black.otf"; sourceTree = "<group>"; };
+		6DB432E72832C1CE00333DAC /* sf-ui-display-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-bold.otf"; sourceTree = "<group>"; };
+		6DB432F028331B5D00333DAC /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +60,7 @@
 		6D84B156281860B100B63912 = {
 			isa = PBXGroup;
 			children = (
+				6DB432DF2832C1C400333DAC /* fonts */,
 				6D84B161281860B100B63912 /* RickAndMorty */,
 				6D84B160281860B100B63912 /* Products */,
 				6D84B1832818627E00B63912 /* Frameworks */,
@@ -72,6 +85,7 @@
 				6D84B16B281860B200B63912 /* Assets.xcassets */,
 				6D84B16D281860B200B63912 /* LaunchScreen.storyboard */,
 				6D84B170281860B200B63912 /* Info.plist */,
+				6DB432F028331B5D00333DAC /* CharacterModel.swift */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";
@@ -81,6 +95,8 @@
 			children = (
 				6D84B1842818634900B63912 /* Table */,
 				6D84B17A281861F600B63912 /* Character */,
+				6DB432DD2832BEDC00333DAC /* MainViewController.swift */,
+				6D671F442833EC8000141CB1 /* FavouriteViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -98,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				6D84B1812818623B00B63912 /* Colors.swift */,
+				6D088D24282C25EC00BD70DC /* RootViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -116,6 +133,15 @@
 				6D84B1872818655100B63912 /* SearchTableView.swift */,
 			);
 			path = Table;
+			sourceTree = "<group>";
+		};
+		6DB432DF2832C1C400333DAC /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6DB432E62832C1CE00333DAC /* sf-ui-display-black.otf */,
+				6DB432E72832C1CE00333DAC /* sf-ui-display-bold.otf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +208,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB432EB2832C1DE00333DAC /* sf-ui-display-black.otf in Resources */,
+				6DB432EF2832C1DE00333DAC /* sf-ui-display-bold.otf in Resources */,
 				6D84B16F281860B200B63912 /* LaunchScreen.storyboard in Resources */,
 				6D84B16C281860B200B63912 /* Assets.xcassets in Resources */,
 			);
@@ -195,11 +223,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D84B1822818623B00B63912 /* Colors.swift in Sources */,
+				6DB432F128331B5D00333DAC /* CharacterModel.swift in Sources */,
+				6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */,
 				6D84B1882818655100B63912 /* SearchTableView.swift in Sources */,
 				6D84B1862818635900B63912 /* SearchTableViewController.swift in Sources */,
 				6D84B17E2818621200B63912 /* CharacterViewController.swift in Sources */,
 				6D84B163281860B100B63912 /* AppDelegate.swift in Sources */,
 				6D84B17D2818621200B63912 /* CharacterInfoView.swift in Sources */,
+				6DB432DE2832BEDC00333DAC /* MainViewController.swift in Sources */,
+				6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */,
 				6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +383,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-warn-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = HSE.RickAndMorty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -378,6 +411,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-warn-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = HSE.RickAndMorty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
