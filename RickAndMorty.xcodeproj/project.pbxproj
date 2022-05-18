@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D088D24282C25EC00BD70DC /* RootViewController.swift */; };
 		6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F442833EC8000141CB1 /* FavouriteViewController.swift */; };
+		6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F4628340FDF00141CB1 /* ImageLoader.swift */; };
 		6D84B163281860B100B63912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B162281860B100B63912 /* AppDelegate.swift */; };
 		6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B164281860B100B63912 /* SceneDelegate.swift */; };
 		6D84B16C281860B200B63912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D84B16B281860B200B63912 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		6D088D24282C25EC00BD70DC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		6D671F442833EC8000141CB1 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
+		6D671F4628340FDF00141CB1 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		6D84B15F281860B100B63912 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D84B162281860B100B63912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D84B164281860B100B63912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				6D84B16D281860B200B63912 /* LaunchScreen.storyboard */,
 				6D84B170281860B200B63912 /* Info.plist */,
 				6DB432F028331B5D00333DAC /* CharacterModel.swift */,
+				6D671F4628340FDF00141CB1 /* ImageLoader.swift */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			files = (
 				6D84B1822818623B00B63912 /* Colors.swift in Sources */,
 				6DB432F128331B5D00333DAC /* CharacterModel.swift in Sources */,
+				6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */,
 				6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */,
 				6D84B1882818655100B63912 /* SearchTableView.swift in Sources */,
 				6D84B1862818635900B63912 /* SearchTableViewController.swift in Sources */,

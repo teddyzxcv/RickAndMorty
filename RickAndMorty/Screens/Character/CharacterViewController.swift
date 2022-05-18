@@ -3,7 +3,7 @@ import UIKit
 import Kingfisher
 import CloudKit
 
-final class CharacterViewController: UIViewController {
+final class CharacterViewController: UIViewController, Sendable {
     
     struct Model {
         let imageURL: URL
@@ -89,7 +89,16 @@ final class CharacterViewController: UIViewController {
     }
     
     private func updateInfo() {
-        icon.kf.setImage(with: model.imageURL)
+        Task {
+            do {
+                if let avatar = try await ImageLoader().getImage(from: model.imageURL) {
+                    icon.image = avatar
+                }
+            } catch {
+            }
+        }
+        
+        //icon.kf.setImage(with: model.imageURL)
         nameLabel.text = charaterModel?.name
         infoCell.update(with: InfoCell.Model(key: "Status", value: charaterModel?.status ?? "..."))
     }

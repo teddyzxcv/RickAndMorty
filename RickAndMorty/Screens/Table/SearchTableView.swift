@@ -12,7 +12,7 @@ final class CharacterTabelView: UITableView {
    
 }
 
-final class CharacterCollectionCell: UICollectionViewCell {
+final class CharacterCollectionCell: UICollectionViewCell, Sendable {
     
     static let identifier = "CharacterCollectionCell"
 
@@ -38,7 +38,14 @@ final class CharacterCollectionCell: UICollectionViewCell {
     }
     
     func update(_ model: Model){
-        icon.kf.setImage(with: model.imageURL)
+        Task {
+            do {
+                if let avatar = try await ImageLoader().getImage(from: model.imageURL) {
+                    icon.image = avatar
+                }
+            } catch {
+            }
+        }
     }
     
     private lazy var icon: UIImageView = {
