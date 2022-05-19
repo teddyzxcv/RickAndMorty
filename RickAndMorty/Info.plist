@@ -4,6 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>sf-ui-display-bold.otf</string>
+		<string>SFUIText-Semibold.ttf</string>
 		<string>sf-ui-display-black.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

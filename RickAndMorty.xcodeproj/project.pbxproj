@@ -10,6 +10,8 @@
 		6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D088D24282C25EC00BD70DC /* RootViewController.swift */; };
 		6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F442833EC8000141CB1 /* FavouriteViewController.swift */; };
 		6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F4628340FDF00141CB1 /* ImageLoader.swift */; };
+		6D671F4A2835AB0F00141CB1 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F492835AB0F00141CB1 /* SearchBarView.swift */; };
+		6D671F4C2835C38B00141CB1 /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F4B2835C38B00141CB1 /* CharacterTableViewCell.swift */; };
 		6D84B163281860B100B63912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B162281860B100B63912 /* AppDelegate.swift */; };
 		6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84B164281860B100B63912 /* SceneDelegate.swift */; };
 		6D84B16C281860B200B63912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D84B16B281860B200B63912 /* Assets.xcassets */; };
@@ -30,6 +32,9 @@
 		6D088D24282C25EC00BD70DC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		6D671F442833EC8000141CB1 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		6D671F4628340FDF00141CB1 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		6D671F482835A41900141CB1 /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
+		6D671F492835AB0F00141CB1 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		6D671F4B2835C38B00141CB1 /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
 		6D84B15F281860B100B63912 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D84B162281860B100B63912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D84B164281860B100B63912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +139,8 @@
 			children = (
 				6D84B1852818635900B63912 /* SearchTableViewController.swift */,
 				6D84B1872818655100B63912 /* SearchTableView.swift */,
+				6D671F492835AB0F00141CB1 /* SearchBarView.swift */,
+				6D671F4B2835C38B00141CB1 /* CharacterTableViewCell.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -141,6 +148,7 @@
 		6DB432DF2832C1C400333DAC /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6D671F482835A41900141CB1 /* SFUIText-Semibold.ttf */,
 				6DB432E62832C1CE00333DAC /* sf-ui-display-black.otf */,
 				6DB432E72832C1CE00333DAC /* sf-ui-display-bold.otf */,
 			);
@@ -226,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D84B1822818623B00B63912 /* Colors.swift in Sources */,
+				6D671F4C2835C38B00141CB1 /* CharacterTableViewCell.swift in Sources */,
 				6DB432F128331B5D00333DAC /* CharacterModel.swift in Sources */,
 				6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */,
 				6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */,
@@ -234,6 +243,7 @@
 				6D84B17E2818621200B63912 /* CharacterViewController.swift in Sources */,
 				6D84B163281860B100B63912 /* AppDelegate.swift in Sources */,
 				6D84B17D2818621200B63912 /* CharacterInfoView.swift in Sources */,
+				6D671F4A2835AB0F00141CB1 /* SearchBarView.swift in Sources */,
 				6DB432DE2832BEDC00333DAC /* MainViewController.swift in Sources */,
 				6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */,
 				6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */,

@@ -38,14 +38,7 @@ final class CharacterCollectionCell: UICollectionViewCell, Sendable {
     }
     
     func update(_ model: Model){
-        Task {
-            do {
-                if let avatar = try await ImageLoader().getImage(from: model.imageURL) {
-                    icon.image = avatar
-                }
-            } catch {
-            }
-        }
+        icon.kf.setImage(with: model.imageURL)
     }
     
     private lazy var icon: UIImageView = {
@@ -59,7 +52,7 @@ final class CharacterCollectionCell: UICollectionViewCell, Sendable {
 }
 
 
-final class CharacterTableCell: UITableViewCell {
+final class RecentCharacterTableCell: UITableViewCell {
     
     struct Model {
         let imageurls: [URL]
@@ -68,7 +61,7 @@ final class CharacterTableCell: UITableViewCell {
     
     var controller: UIViewController?
     
-    static let identifier = "CharacterTableCell"
+    static let identifier = "RecentCharacterTableCell"
     
     var imagesurls = [URL]()
     
@@ -90,20 +83,60 @@ final class CharacterTableCell: UITableViewCell {
         return uv
     }()
     
+    func setUpRecentLabel() {
+        let view = recentLabel
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 22)
+
+        view.backgroundColor = .bg
+
+
+        view.textColor = .main
+
+        view.font = UIFont(name: "SFUIText-Semibold", size: 18)
+        
+        view.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        print("Font:")
+        
+
+
+        view.attributedText = NSMutableAttributedString(string: "Recent", attributes: [NSAttributedString.Key.kern: -0.2])
+    }
+    
+    private lazy var recentLabel: UILabel = UILabel()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .bg
+        self.contentView.backgroundColor = .bg
         
-        contentView.addSubview(collectionView)
+        self.selectionStyle = .none
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 200),
             contentView.heightAnchor.constraint(equalToConstant: 200)
         ])
+        
+        setUpRecentLabel()
+        contentView.addSubview(recentLabel)
+        recentLabel.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            recentLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 16),
+            recentLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            recentLabel.topAnchor.constraint(equalTo: self.topAnchor)
+        ])
+        
+        
+        contentView.addSubview(collectionView)
+        collectionView.backgroundColor = .bg
+
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: recentLabel.bottomAnchor, constant: 8),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
         ])
+        
+        
         collectionView.register(CharacterCollectionCell.self, forCellWithReuseIdentifier: CharacterCollectionCell.identifier)
     }
     
@@ -112,7 +145,7 @@ final class CharacterTableCell: UITableViewCell {
     }
 }
 
-extension CharacterTableCell: UICollectionViewDataSource {
+extension RecentCharacterTableCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesurls.count
     }
@@ -126,7 +159,7 @@ extension CharacterTableCell: UICollectionViewDataSource {
 
 
 
-extension CharacterTableCell: UICollectionViewDelegate {
+extension RecentCharacterTableCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = CharacterViewController(model: CharacterViewController.Model(imageURL: imagesurls[indexPath.row]))
         vc.modalPresentationStyle = .overFullScreen
@@ -135,11 +168,11 @@ extension CharacterTableCell: UICollectionViewDelegate {
     }
 }
 
-extension CharacterTableCell: UICollectionViewDelegateFlowLayout {
+extension RecentCharacterTableCell: UICollectionViewDelegateFlowLayout {
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionViewLayout.scrollDirection = .horizontal
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 16, bottom: 23, right: 0))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 0))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

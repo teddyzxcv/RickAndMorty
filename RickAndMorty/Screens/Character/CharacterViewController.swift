@@ -9,7 +9,7 @@ final class CharacterViewController: UIViewController, Sendable {
         let imageURL: URL
     }
     
-    var charaterModel: CharacterModel? {
+    var characterModel: CharacterModel? {
         didSet {
             DispatchQueue.main.async { [self] in
                 updateInfo()
@@ -31,25 +31,25 @@ final class CharacterViewController: UIViewController, Sendable {
         urlComp.path = path.joined(separator: "/")
         urlComp.queryItems = []
         guard let characterURL = urlComp.url else {return}
-        let session = URLSession.shared.dataTask(with: URLRequest(url: characterURL), completionHandler: {data, _, _ in
-            guard
-                let data = data,
-                let dict = try? JSONSerialization.jsonObject (with: data, options: .json5Allowed) as? [String: Any]
-            else { return }
-            let name = dict["name"] as! String
-            let imagePath = URL(string: (dict["image"] as? String)!)!
-            let id = dict["id"] as? Int
-            let status = dict["status"] as? String
-            let species = dict["species"] as? String
-            self.charaterModel = CharacterModel(id: id!, name: name, status: status!, species: species!, image: imagePath)
-        })
-        session.resume()
+        Task {
+             do {
+                 if let character = try await CharacterLoader().loadCharacter(characterURL) {
+                     self.characterModel = character
+                 }
+             } catch {
+             }
+         }
     }
     
     init(model: Model) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
         imageURLToCharaterModel(url: model.imageURL)
+    }
+    
+    init(characterModel: CharacterModel) {
+        self.characterModel = characterModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     @available(*, unavailable)
@@ -89,21 +89,13 @@ final class CharacterViewController: UIViewController, Sendable {
     }
     
     private func updateInfo() {
-        Task {
-            do {
-                if let avatar = try await ImageLoader().getImage(from: model.imageURL) {
-                    icon.image = avatar
-                }
-            } catch {
-            }
-        }
-        
+        icon.kf.setImage(with: characterModel?.image)
         //icon.kf.setImage(with: model.imageURL)
-        nameLabel.text = charaterModel?.name
-        infoCell.update(with: InfoCell.Model(key: "Status", value: charaterModel?.status ?? "..."))
+        nameLabel.text = characterModel?.name
+        infoCell.update(with: InfoCell.Model(key: "Status", value: characterModel?.status ?? "..."))
     }
     
-    private let model: Model
+    private var model: Model? = nil
     
     private lazy var icon: UIImageView = {
         let ret = UIImageView()
