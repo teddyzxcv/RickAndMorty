@@ -34,6 +34,10 @@ class SearchTableViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        let searchRecentCharacterID = UserDefaults.standard.array(forKey: "Recent characters") as? [Int]
+        if searchRecentCharacterID == nil {
+            UserDefaults.standard.set([Int](),forKey: "Recent characters")
+        }
         tableView.separatorColor = .main
         view.addSubview(tableView)
         view.backgroundColor = .bg
@@ -60,6 +64,7 @@ class SearchTableViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
         ])
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.backgroundColor = .bg
         tableView.register(RecentCharacterTableCell.self, forCellReuseIdentifier: RecentCharacterTableCell.identifier)
         tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
@@ -70,18 +75,18 @@ class SearchTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
+        tableView.reloadData()
     }
 }
 
 extension SearchTableViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard searchedCharacters.count > 0 else { return }
-        let vc = CharacterViewController(characterModel: searchedCharacters[indexPath.row])
+        let character = searchedCharacters[indexPath.row]
+        let vc = CharacterViewController(characterModel: character)
         vc.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
     }
     
 }
@@ -96,12 +101,13 @@ extension SearchTableViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.separatorColor = .bg
-        if searchedCharacters.count <= 0 {
+        if searchedCharacters.count <= 0 && indexPath.row == 0 {
+            tableView.separatorColor = .bg
             let cell = tableView.dequeueReusableCell(withIdentifier: RecentCharacterTableCell.identifier, for: indexPath) as! RecentCharacterTableCell
             var images = [URL]()
-            for i in 1...10 {
-                images.append(URL(string:"https://rickandmortyapi.com/api/character/avatar/\(i + indexPath.row * 10).jpeg")!)
+            let searchRecentCharacterID = UserDefaults.standard.array(forKey: "Recent characters") as? [Int]
+            for i in searchRecentCharacterID?.reversed() ?? [Int]() {
+                images.append(ImageLoader.getImageURLbyID(i)!)
             }
             cell.update(RecentCharacterTableCell.Model(
                 imageurls: images,
@@ -109,6 +115,7 @@ extension SearchTableViewController: UITableViewDataSource{
             ))
             return cell
         } else {
+            tableView.separatorColor = .main
             let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as! CharacterTableViewCell
             cell.update(searchedCharacters[indexPath.row])
             return cell
@@ -147,14 +154,21 @@ extension SearchTableViewController: UITextFieldDelegate {
             do {
                 let (data, response) = try await URLSession.shared.data(from: url!)
                 guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
+                    searchedCharacters.removeAll()
+                    tableView.reloadData()
+                    return
                 }
                 guard let dict = try? JSONSerialization.jsonObject (with: data, options: .json5Allowed) as? [String: Any],
                 let pageInfo = dict["info"] as? [String: Any] else {
                     return
                 }
-                self.pagesCount = (pageInfo["pages"] as? Int)!
                 self.characterCount = (pageInfo["count"] as? Int)!
+                if self.characterCount == 0 {
+                    tableView.reloadData()
+                    return
+                    
+                }
+                self.pagesCount = (pageInfo["pages"] as? Int)!
                 let next = (pageInfo["next"] as? String)
                 let prev = (pageInfo["next"] as? String)
                 self.nextPage = next == nil ? nil : URL(string: next!)

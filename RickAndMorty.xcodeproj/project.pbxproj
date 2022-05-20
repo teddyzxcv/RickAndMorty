@@ -101,6 +101,7 @@
 		6D84B179281861EA00B63912 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				6D088D24282C25EC00BD70DC /* RootViewController.swift */,
 				6D84B1842818634900B63912 /* Table */,
 				6D84B17A281861F600B63912 /* Character */,
 				6DB432DD2832BEDC00333DAC /* MainViewController.swift */,
@@ -122,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				6D84B1812818623B00B63912 /* Colors.swift */,
-				6D088D24282C25EC00BD70DC /* RootViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

@@ -18,6 +18,14 @@ class ImageLoader {
         return UIImage (data: data)
     }
     
+    static func getImageURLbyID(_ id: Int) -> URL? {
+        return URL(string:"https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")
+    }
+    
+    static func getCharacterURLbyID(_ id: Int) -> URL? {
+        return URL(string: "https://rickandmortyapi.com/api/character/\(id)"  )
+    }
+    
     
     struct Model {
         let name: AnyPublisher<String, Error>

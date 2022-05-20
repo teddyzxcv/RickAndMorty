@@ -17,6 +17,8 @@ final class CharacterViewController: UIViewController, Sendable {
         }
     }
     
+    let favouriteButton = UIButton()
+    
     func imageURLToCharaterModel(url: URL) {
         print("Read data")
         var path = url.pathComponents
@@ -32,13 +34,13 @@ final class CharacterViewController: UIViewController, Sendable {
         urlComp.queryItems = []
         guard let characterURL = urlComp.url else {return}
         Task {
-             do {
-                 if let character = try await CharacterLoader().loadCharacter(characterURL) {
-                     self.characterModel = character
-                 }
-             } catch {
-             }
-         }
+            do {
+                if let character = try await CharacterLoader().loadCharacter(characterURL) {
+                    self.characterModel = character
+                }
+            } catch {
+            }
+        }
     }
     
     init(model: Model) {
@@ -61,15 +63,71 @@ final class CharacterViewController: UIViewController, Sendable {
         super.viewDidLoad()
         view.backgroundColor = .bg
         title = "Character"
-        
         setupUI()
+        let favouriteCharacters = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
+        if favouriteCharacters == nil {
+            UserDefaults.standard.set([Int](),forKey: "Favourite characters")
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateInfo()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateRecentCharacter()
+    }
+    
+    func updateRecentCharacter() {
+        let searchRecentCharacterID = UserDefaults.standard.array(forKey: "Recent characters") as? [Int]
+        guard var searchRecentCharacterID = searchRecentCharacterID else { return }
+        guard let characterModel = characterModel else { return }
+        searchRecentCharacterID = searchRecentCharacterID.filter { $0 != characterModel.id }
+        searchRecentCharacterID.append(characterModel.id)
+        if searchRecentCharacterID.count > 20 {
+            searchRecentCharacterID.remove(at: 0)
+        }
+        let newSearchRecentCharacterID = searchRecentCharacterID
+        UserDefaults.standard.set(newSearchRecentCharacterID, forKey: "Recent characters")
+    }
+    
+    @objc func favouriteButtonAction(sender: UIButton!) {
+        self.favouriteButton.isSelected = !self.favouriteButton.isSelected
+        if self.favouriteButton.isSelected {
+            let favouriteCharacters = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
+            var newFavouriteCharacters = favouriteCharacters
+            newFavouriteCharacters?.append(characterModel!.id)
+            UserDefaults.standard.set(newFavouriteCharacters, forKey: "Favourite characters")
+        } else {
+            let favouriteCharacters = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
+            let newFavouriteCharacters = favouriteCharacters?.filter {$0 != characterModel?.id}
+            UserDefaults.standard.set(newFavouriteCharacters, forKey: "Favourite characters")
+        }
+    }
+    
+    
     private func setupUI() {
         view.addSubview(icon)
-        view.addSubview(nameLabel)
         view.addSubview(infoCell)
+        nameLabel.lineBreakMode = .byWordWrapping
+        nameLabel.numberOfLines = 3
+        let nameAndButtonView = UIView()
+        nameAndButtonView.addSubview(nameLabel)
+        nameAndButtonView.addSubview(favouriteButton)
+        nameAndButtonView.subviews.forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        view.addSubview(nameAndButtonView)
+        
+        nameLabel.numberOfLines = 0
+        nameLabel.lineBreakMode = .byWordWrapping
+        
+        favouriteButton.setImage(UIImage(named: "Favourite_button_s")?.withTintColor(.main), for: .selected)
+        favouriteButton.setImage(UIImage(named: "Favourite_button_u"), for: .normal)
+        favouriteButton.tintColor = .main
+        favouriteButton.addTarget(self, action: #selector(favouriteButtonAction), for: .touchUpInside)
         
         view.subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -80,19 +138,45 @@ final class CharacterViewController: UIViewController, Sendable {
             icon.heightAnchor.constraint(equalToConstant: 300),
             icon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             icon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            nameLabel.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 35),
-            nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            infoCell.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
+            nameAndButtonView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            nameAndButtonView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            nameAndButtonView.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 35),
+            infoCell.topAnchor.constraint(equalTo: nameAndButtonView.bottomAnchor, constant: 20),
             infoCell.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             infoCell.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
+        
+        favouriteButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        favouriteButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        nameAndButtonView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        NSLayoutConstraint.activate([
+            favouriteButton.topAnchor.constraint(equalTo: nameAndButtonView.topAnchor),
+            favouriteButton.trailingAnchor.constraint(equalTo: nameAndButtonView.trailingAnchor),
+            favouriteButton.bottomAnchor.constraint(lessThanOrEqualTo: nameAndButtonView.bottomAnchor),
+            nameLabel.topAnchor.constraint(equalTo: nameAndButtonView.topAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: nameAndButtonView.leadingAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: nameAndButtonView.bottomAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: favouriteButton.leadingAnchor, constant: -16)
+        ])
+        nameAndButtonView.sizeToFit()
     }
     
     private func updateInfo() {
-        icon.kf.setImage(with: characterModel?.image)
-        //icon.kf.setImage(with: model.imageURL)
-        nameLabel.text = characterModel?.name
-        infoCell.update(with: InfoCell.Model(key: "Status", value: characterModel?.status ?? "..."))
+        guard let characterModel = characterModel else {
+            return
+        }
+        
+        icon.kf.setImage(with: characterModel.image)
+        nameLabel.text = characterModel.name
+        infoCell.update(with: InfoCell.Model(key: "Status", value: characterModel.status ))
+        var favouriteCharacters = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
+        favouriteCharacters = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
+        if (favouriteCharacters!.contains(characterModel.id)) {
+            favouriteButton.isSelected = true
+        } else {
+            favouriteButton.isSelected = false
+        }
     }
     
     private var model: Model? = nil
@@ -108,7 +192,6 @@ final class CharacterViewController: UIViewController, Sendable {
     private lazy var nameLabel: UILabel = {
         let ret = UILabel()
         ret.font = .boldSystemFont(ofSize: 34)
-        ret.numberOfLines = 1
         ret.textColor = .main
         return ret
     }()

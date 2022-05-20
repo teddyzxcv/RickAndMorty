@@ -12,7 +12,6 @@ class SearchBarView: UITextField {
     
     init() {
         super.init(frame: CGRect())
-        
     }
     
     func setUp() {
@@ -23,7 +22,6 @@ class SearchBarView: UITextField {
         self.attributedPlaceholder = NSMutableAttributedString(string: "Search for character", attributes: [NSAttributedString.Key.font : placeHolderFont!, NSAttributedString.Key.foregroundColor : UIColor.secondary,])
         self.layer.cornerRadius = 10
         self.layer.borderWidth = CGFloat(2)
-        self.layer.borderColor = UIColor.main.resolvedColor(with: self.traitCollection).cgColor
         self.leftViewMode = .always
         let boundView = UIView(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
         let iconView = UIImageView(image: UIImage(named: "Search") )
@@ -35,6 +33,12 @@ class SearchBarView: UITextField {
         iconView.center.y = boundView.center.y
         
         self.leftView?.tintColor = .main
+        self.layer.borderColor = UIColor.main.cgColor
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        self.layer.borderColor = UIColor.main.cgColor
     }
     
     required init?(coder: NSCoder) {

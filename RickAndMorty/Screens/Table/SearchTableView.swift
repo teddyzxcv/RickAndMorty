@@ -31,6 +31,8 @@ final class CharacterCollectionCell: UICollectionViewCell, Sendable {
             icon.bottomAnchor.constraint(equalTo: bottomAnchor),
             icon.leftAnchor.constraint(equalTo: leftAnchor),
         ])
+        icon.layer.borderWidth = 1
+        icon.layer.borderColor = UIColor.main.cgColor
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +50,11 @@ final class CharacterCollectionCell: UICollectionViewCell, Sendable {
         ret.contentMode = .scaleAspectFill
         return ret
     }()
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        icon.layer.borderColor = UIColor.main.cgColor
+    }
     
 }
 
@@ -97,12 +104,14 @@ final class RecentCharacterTableCell: UITableViewCell {
         view.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         print("Font:")
         
-
-
         view.attributedText = NSMutableAttributedString(string: "Recent", attributes: [NSAttributedString.Key.kern: -0.2])
     }
     
     private lazy var recentLabel: UILabel = UILabel()
+    
+    func updateUI() {
+        
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -131,7 +140,7 @@ final class RecentCharacterTableCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: recentLabel.bottomAnchor, constant: 8),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -11),
             collectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
         ])
