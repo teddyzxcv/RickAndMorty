@@ -37,9 +37,9 @@ class FavouriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         noResultView.textAlignment = .center
         favouriteCharacters.removeAll()
-        super.viewWillAppear(animated)
         let favouriteCharactersID = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
         loadFavouriteCharacters(favouriteCharactersID ?? [Int]())
+        super.viewWillAppear(animated)
         tableView.setNeedsUpdateConstraints()
     }
     
@@ -108,6 +108,8 @@ extension FavouriteViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.separatorColor = .main
         let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as! CharacterTableViewCell
+        print(indexPath.row)
+        print(favouriteCharacters.count)
         cell.update(favouriteCharacters[indexPath.row])
         cell.contentView.heightAnchor.constraint(equalToConstant: 159).isActive = true
         return cell
