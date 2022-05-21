@@ -5,12 +5,12 @@
 //  Created by ZhengWu Pan on 26.04.2022.
 //
 
-import Foundation
+@preconcurrency import Foundation
 import UIKit
 import CoreMedia
 import SwiftUI
 
-class SearchTableViewController: UIViewController {
+class SearchTableViewController: UIViewController, Sendable {
     var pagesCount: Int = 0
     
     var characterCount: Int = 0

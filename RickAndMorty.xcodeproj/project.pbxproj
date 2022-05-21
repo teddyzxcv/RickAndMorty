@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D088D24282C25EC00BD70DC /* RootViewController.swift */; };
+		6D23851528395175004B4EA0 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */; };
 		6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F442833EC8000141CB1 /* FavouriteViewController.swift */; };
 		6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F4628340FDF00141CB1 /* ImageLoader.swift */; };
 		6D671F4A2835AB0F00141CB1 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F492835AB0F00141CB1 /* SearchBarView.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		6D088D24282C25EC00BD70DC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		6D671F442833EC8000141CB1 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		6D671F4628340FDF00141CB1 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		6D671F482835A41900141CB1 /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				6D84B17A281861F600B63912 /* Character */,
 				6DB432DD2832BEDC00333DAC /* MainViewController.swift */,
 				6D671F442833EC8000141CB1 /* FavouriteViewController.swift */,
+				6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				6DB432DE2832BEDC00333DAC /* MainViewController.swift in Sources */,
 				6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */,
 				6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */,
+				6D23851528395175004B4EA0 /* FavouriteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

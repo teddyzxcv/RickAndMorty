@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class FavouriteViewController: UIViewController {
+class FavouriteViewController: UIViewController, Sendable {
     let tableView = UITableView()
     
     let noResultView = UILabel()
@@ -62,7 +62,7 @@ class FavouriteViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        tableView.register(CharacterTableViewCell.self, forCellReuseIdentifier: CharacterTableViewCell.identifier)
+        tableView.register(FavouriteTableViewCell.self, forCellReuseIdentifier: FavouriteTableViewCell.identifier)
     }
 }
 
@@ -108,11 +108,10 @@ extension FavouriteViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.separatorColor = .main
-        let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as! CharacterTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteTableViewCell.identifier, for: indexPath) as! FavouriteTableViewCell
         print(indexPath.row)
         print(favouriteCharacters.count)
         cell.update(favouriteCharacters[indexPath.row])
-        cell.contentView.heightAnchor.constraint(equalToConstant: 159).isActive = true
         return cell
     }
 }
