@@ -87,6 +87,8 @@ final class RecentCharacterTableCell: UITableViewCell {
         uv.translatesAutoresizingMaskIntoConstraints = false
         uv.dataSource = self
         uv.delegate = self
+        uv.showsHorizontalScrollIndicator = false
+        uv.showsVerticalScrollIndicator = false
         return uv
     }()
     

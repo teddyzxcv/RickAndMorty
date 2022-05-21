@@ -26,6 +26,7 @@
 		6DB432EB2832C1DE00333DAC /* sf-ui-display-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB432E62832C1CE00333DAC /* sf-ui-display-black.otf */; };
 		6DB432EF2832C1DE00333DAC /* sf-ui-display-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB432E72832C1CE00333DAC /* sf-ui-display-bold.otf */; };
 		6DB432F128331B5D00333DAC /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB432F028331B5D00333DAC /* CharacterModel.swift */; };
+		6DE33F47283913350031A73F /* ImageZoomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE33F46283913350031A73F /* ImageZoomScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		6DB432E62832C1CE00333DAC /* sf-ui-display-black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-black.otf"; sourceTree = "<group>"; };
 		6DB432E72832C1CE00333DAC /* sf-ui-display-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sf-ui-display-bold.otf"; sourceTree = "<group>"; };
 		6DB432F028331B5D00333DAC /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
+		6DE33F46283913350031A73F /* ImageZoomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				6D84B170281860B200B63912 /* Info.plist */,
 				6DB432F028331B5D00333DAC /* CharacterModel.swift */,
 				6D671F4628340FDF00141CB1 /* ImageLoader.swift */,
+				6DE33F46283913350031A73F /* ImageZoomScrollView.swift */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				6D84B163281860B100B63912 /* AppDelegate.swift in Sources */,
 				6D84B17D2818621200B63912 /* CharacterInfoView.swift in Sources */,
 				6D671F4A2835AB0F00141CB1 /* SearchBarView.swift in Sources */,
+				6DE33F47283913350031A73F /* ImageZoomScrollView.swift in Sources */,
 				6DB432DE2832BEDC00333DAC /* MainViewController.swift in Sources */,
 				6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */,
 				6D84B165281860B100B63912 /* SceneDelegate.swift in Sources */,

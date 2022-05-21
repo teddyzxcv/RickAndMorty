@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreMedia
+import SwiftUI
 
 class SearchTableViewController: UIViewController {
     var pagesCount: Int = 0
@@ -34,6 +35,7 @@ class SearchTableViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        tableView.tableHeaderView = UIView()
         let searchRecentCharacterID = UserDefaults.standard.array(forKey: "Recent characters") as? [Int]
         if searchRecentCharacterID == nil {
             UserDefaults.standard.set([Int](),forKey: "Recent characters")
@@ -181,7 +183,8 @@ extension SearchTableViewController: UITextFieldDelegate {
                     let status = characterDict["status"] as? String
                     let species = characterDict["species"] as? String
                     let image = URL(string: (characterDict["image"] as? String)!)
-                    searchedCharacters.append(CharacterModel(id: id!, name: name!, status: status!, species: species!, image: image!))
+                    let gender = characterDict["gender"] as? String
+                    searchedCharacters.append(CharacterModel(id: id!, name: name!, status: status!, species: species!, gender: gender!, image: image!))
                 }
                 tableView.reloadData()
             } catch {

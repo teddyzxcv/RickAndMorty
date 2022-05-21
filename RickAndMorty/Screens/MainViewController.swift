@@ -14,8 +14,17 @@ class MainViewController: UIViewController {
     
     let bookLabel = UILabel()
     
+    var imageZoomScrollView: ImageZoomScrollView!
+    
+    var isImageOpened = false
+    
+    let closeButton = UIButton()
+    
+    var topImageContraint = NSLayoutConstraint()
+    
     override func viewDidLoad() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        super.viewDidLoad()
+        imageZoomScrollView = ImageZoomScrollView(frame: view.bounds)
         titleLabel.frame = CGRect(x: 0, y: 0, width: 343, height: 258)
         titleLabel.backgroundColor = .bg
         
@@ -31,7 +40,7 @@ class MainViewController: UIViewController {
             NSAttributedString.Key.foregroundColor : UIColor.bg,
             NSAttributedString.Key.strokeWidth : -2.0,
             NSAttributedString.Key.kern: 3,
-          ])
+        ])
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         // Use safe area
         NSLayoutConstraint.activate([
@@ -40,6 +49,19 @@ class MainViewController: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
         setView()
+        topImageContraint = imageZoomScrollView.topAnchor.constraint(equalTo: bookLabel.bottomAnchor, constant: 45.5)
+        view.addSubview(imageZoomScrollView)
+        imageZoomScrollView.translatesAutoresizingMaskIntoConstraints = false
+        imageZoomScrollView.set(image: UIImage(named: "Main_image")!)
+        NSLayoutConstraint.activate([
+            topImageContraint,
+            imageZoomScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            imageZoomScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            imageZoomScrollView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width * imageZoomScrollView.imageZoomView.getAspectRatioHeightOnWidth())
+        ])
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        imageZoomScrollView.addGestureRecognizer(tapGR)
+        imageZoomScrollView.isUserInteractionEnabled = true
     }
     
     func setView() {
@@ -60,7 +82,46 @@ class MainViewController: UIViewController {
             bookLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             bookLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
-        
-        
+        self.view.addSubview(closeButton)
+        closeButton.isHidden = true
+        closeButton.setImage(UIImage(named: "Close_button"), for: .normal)
+        closeButton.tintColor = .main
+        closeButton.addTarget(self, action: #selector(closeImageTapped), for: .touchUpInside)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            closeButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16)
+        ])
+    }
+    
+    @objc func closeImageTapped(sender: UIButton) {
+        topImageContraint.constant = 45.5
+        UIView.animate(withDuration: 0.4, animations: { [self] in
+            self.view.layoutIfNeeded()
+        }, completion: { checker in
+            guard checker else { return }
+        })
+        closeButton.isHidden = !closeButton.isHidden
+        isImageOpened = !isImageOpened
+    }
+    
+    @objc func imageTapped(sender: UITapGestureRecognizer) {
+        self.view.bringSubviewToFront(closeButton)
+        guard sender.state == .ended && !isImageOpened else { return }
+        topImageContraint.constant = 0 - bookLabel.frame.height - titleLabel.frame.height - 24 - self.view.safeAreaInsets.top
+        UIView.animate(withDuration: 0.4, animations: { [self] in
+            self.view.layoutIfNeeded()
+        }, completion: { checker in
+            guard checker else { return }
+        })
+        closeButton.isHidden = !closeButton.isHidden
+        isImageOpened = !isImageOpened
+    }
+}
+
+extension UIImageView {
+    func getAspectRatioHeightOnWidth() -> CGFloat {
+        guard let image = image else { return 0 }
+        return image.size.height / image.size.width
     }
 }

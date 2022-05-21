@@ -12,6 +12,7 @@ struct CharacterModel {
     let name: String
     let status: String
     let species: String
+    let gender: String
     let image: URL
 }
 
@@ -29,6 +30,7 @@ class CharacterLoader {
         let id = dict["id"] as? Int
         let status = dict["status"] as? String
         let species = dict["species"] as? String
-        return  CharacterModel(id: id!, name: name, status: status!, species: species!, image: imagePath)
+        let gender = dict["gender"] as? String
+        return  CharacterModel(id: id!, name: name, status: status!, species: species!,gender: gender!, image: imagePath)
     }
 }

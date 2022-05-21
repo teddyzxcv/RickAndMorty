@@ -11,6 +11,8 @@ import UIKit
 class FavouriteViewController: UIViewController {
     let tableView = UITableView()
     
+    let noResultView = UILabel()
+    
     var favouriteCharacters = [CharacterModel]()
     
     func loadFavouriteCharacters(_ ids: [Int]) {
@@ -33,6 +35,7 @@ class FavouriteViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        noResultView.textAlignment = .center
         favouriteCharacters.removeAll()
         super.viewWillAppear(animated)
         let favouriteCharactersID = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
@@ -41,6 +44,7 @@ class FavouriteViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        tableView.tableHeaderView = UIView()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Favourite"
         tableView.delegate = self
@@ -80,15 +84,13 @@ extension FavouriteViewController: UITableViewDataSource{
         let paragraphStyle = NSMutableParagraphStyle()
 
         paragraphStyle.lineHeightMultiple = 1.07
-        
-        view.textAlignment = .center
-
+    
         view.attributedText = NSMutableAttributedString(string: "No favorites yet", attributes: [NSAttributedString.Key.kern: 0.35, NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if favouriteCharacters.count == 0 {
-            let noResultView = UILabel()
+            noResultView.textAlignment = .center
             noResultView.translatesAutoresizingMaskIntoConstraints = false
             tableView.backgroundView = noResultView
             setUpNotResultView(noResultView)
@@ -107,6 +109,7 @@ extension FavouriteViewController: UITableViewDataSource{
         tableView.separatorColor = .main
         let cell = tableView.dequeueReusableCell(withIdentifier: CharacterTableViewCell.identifier, for: indexPath) as! CharacterTableViewCell
         cell.update(favouriteCharacters[indexPath.row])
+        cell.contentView.heightAnchor.constraint(equalToConstant: 159).isActive = true
         return cell
     }
 }

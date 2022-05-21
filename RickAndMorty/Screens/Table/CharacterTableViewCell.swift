@@ -50,8 +50,6 @@ class CharacterTableViewCell: UITableViewCell {
         
         nameLabel.backgroundColor = .bg
         
-        nameLabel.lineBreakMode = .byWordWrapping
-        
         nameLabel.textColor = .main
         
         nameLabel.font = UIFont(name: "SFUIText-Bold", size: 22)
@@ -63,8 +61,13 @@ class CharacterTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: infoView.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: infoView.trailingAnchor, constant: -102)
+            nameLabel.trailingAnchor.constraint(greaterThanOrEqualTo: infoView.trailingAnchor, constant: -102),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: infoView.trailingAnchor)
         ])
+        nameLabel.numberOfLines = 0
+        
+        nameLabel.lineBreakMode = .byWordWrapping
+        
         infoView.addSubview(speciesLabel)
         
         speciesLabel.frame = CGRect(x: 0, y: 0, width: 58, height: 22)
@@ -87,9 +90,7 @@ class CharacterTableViewCell: UITableViewCell {
         infoView.sizeToFit()
         NSLayoutConstraint.activate([
             infoView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
-        ])
-        nameLabel.numberOfLines = 2
-    }
+        ])    }
     
     func setUpImageView() {
         contentView.addSubview(avatar)
@@ -111,8 +112,11 @@ class CharacterTableViewCell: UITableViewCell {
         avatar.kf.setImage(with: model.image)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.07
-        nameLabel.attributedText = NSMutableAttributedString(string: model.name, attributes: [NSAttributedString.Key.kern: 0.35, NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        
+        var name = model.name
+        if model.name.filter({$0 == " "}).count == 1 {
+            name = model.name.replacingOccurrences(of: " ", with: "\n")
+        }
+        nameLabel.attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.kern: 0.35, NSAttributedString.Key.paragraphStyle: paragraphStyle])
         speciesLabel.attributedText = NSMutableAttributedString(string: model.species, attributes: [NSAttributedString.Key.kern: -0.41, NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
     
@@ -122,7 +126,6 @@ class CharacterTableViewCell: UITableViewCell {
         setUpInfoView()
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 200),
             contentView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }

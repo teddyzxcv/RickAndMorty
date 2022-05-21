@@ -1,5 +1,40 @@
 import UIKit
 
+final class InfoTableCell: UITableViewCell {
+    
+    static let identifier: String = "InfoTableCell"
+    
+    let infoCell = InfoCell()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .bg
+        self.contentView.backgroundColor = .bg
+        self.selectionStyle = .none
+        setUp()
+    }
+    
+    func update(with model: InfoCell.Model) {
+        infoCell.update(with: model)
+    }
+    
+    func setUp() {
+        contentView.addSubview(infoCell)
+        infoCell.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoCell.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            infoCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            infoCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            infoCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+        ])
+    
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 final class InfoCell: UIView {
 
     struct Model {
@@ -43,7 +78,7 @@ final class InfoCell: UIView {
         ])
     }
 
-    private let infoKeyLabel: UILabel = {
+    private lazy var infoKeyLabel: UILabel = {
         let ret = UILabel()
         ret.font = .boldSystemFont(ofSize: 22)
         ret.textColor = .secondary
@@ -51,7 +86,7 @@ final class InfoCell: UIView {
         return ret
     }()
 
-    private let infoValueLabel: UILabel = {
+    private lazy var infoValueLabel: UILabel = {
         let ret = UILabel()
         ret.font = .boldSystemFont(ofSize: 22)
         ret.textColor = .main
