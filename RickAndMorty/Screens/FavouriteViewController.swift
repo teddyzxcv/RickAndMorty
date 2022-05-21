@@ -39,6 +39,7 @@ class FavouriteViewController: UIViewController {
         favouriteCharacters.removeAll()
         let favouriteCharactersID = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
         loadFavouriteCharacters(favouriteCharactersID ?? [Int]())
+        tableView.reloadData()
         super.viewWillAppear(animated)
         tableView.setNeedsUpdateConstraints()
     }
