@@ -35,6 +35,7 @@ class FavouriteViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = true
         noResultView.textAlignment = .center
         favouriteCharacters.removeAll()
         let favouriteCharactersID = UserDefaults.standard.array(forKey: "Favourite characters") as? [Int]
@@ -46,7 +47,6 @@ class FavouriteViewController: UIViewController {
     
     override func viewDidLoad() {
         tableView.tableHeaderView = UIView()
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Favourite"
         tableView.delegate = self
         tableView.dataSource = self

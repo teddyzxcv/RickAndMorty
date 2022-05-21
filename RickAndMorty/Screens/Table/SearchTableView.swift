@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 final class CharacterTabelView: UITableView {
-   
+    
 }
 
 final class CharacterCollectionCell: UICollectionViewCell, Sendable {
     
     static let identifier = "CharacterCollectionCell"
-
+    
     
     struct Model {
         let imageURL: URL
@@ -31,7 +31,17 @@ final class CharacterCollectionCell: UICollectionViewCell, Sendable {
             icon.bottomAnchor.constraint(equalTo: bottomAnchor),
             icon.leftAnchor.constraint(equalTo: leftAnchor),
         ])
-        icon.layer.borderWidth = 1
+        switch traitCollection.userInterfaceStyle {
+        case .light, .unspecified:
+            icon.layer.borderWidth = 1
+            icon.layer.borderColor = UIColor.main.cgColor
+            // light mode detected
+        case .dark:
+            icon.layer.borderWidth = 0
+        default:
+            return
+            // dark mode detected
+        }
         icon.layer.borderColor = UIColor.main.cgColor
     }
     
@@ -53,7 +63,16 @@ final class CharacterCollectionCell: UICollectionViewCell, Sendable {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        icon.layer.borderColor = UIColor.main.cgColor
+        switch previousTraitCollection?.userInterfaceStyle {
+        case .light, .unspecified:
+            icon.layer.borderWidth = 0
+        case .dark:
+            icon.layer.borderWidth = 1
+            icon.layer.borderColor = UIColor.main.cgColor
+        default:
+            return
+            // dark mode detected
+        }
     }
     
 }
@@ -73,7 +92,7 @@ final class RecentCharacterTableCell: UITableViewCell {
     var imagesurls = [URL]()
     
     private let collectionViewLayout = UICollectionViewFlowLayout()
-
+    
     func update(_ model: Model) {
         self.imagesurls = model.imageurls
         self.controller = model.controller
@@ -95,12 +114,12 @@ final class RecentCharacterTableCell: UITableViewCell {
     func setUpRecentLabel() {
         let view = recentLabel
         view.frame = CGRect(x: 0, y: 0, width: 100, height: 22)
-
+        
         view.backgroundColor = .bg
-
-
+        
+        
         view.textColor = .main
-
+        
         view.font = UIFont(name: "SFUIText-Semibold", size: 18)
         
         view.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -129,7 +148,7 @@ final class RecentCharacterTableCell: UITableViewCell {
         setUpRecentLabel()
         contentView.addSubview(recentLabel)
         recentLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             recentLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 16),
             recentLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
@@ -139,7 +158,7 @@ final class RecentCharacterTableCell: UITableViewCell {
         
         contentView.addSubview(collectionView)
         collectionView.backgroundColor = .bg
-
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: recentLabel.bottomAnchor, constant: 8),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -11),

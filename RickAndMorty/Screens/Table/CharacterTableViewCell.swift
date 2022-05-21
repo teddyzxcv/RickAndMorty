@@ -105,7 +105,16 @@ class CharacterTableViewCell: UITableViewCell {
         avatar.layer.borderWidth = CGFloat(1)
         avatar.layer.masksToBounds = true
         avatar.contentMode = .scaleAspectFill
-        avatar.layer.borderColor = UIColor.main.cgColor
+        switch traitCollection.userInterfaceStyle {
+        case .light, .unspecified:
+            avatar.layer.borderWidth = 1
+            avatar.layer.borderColor = UIColor.main.cgColor
+        case .dark:
+            avatar.layer.borderWidth = 0
+        default:
+            return
+            // dark mode detected
+        }
     }
     
     func update(_ model: CharacterModel) {
@@ -136,6 +145,15 @@ class CharacterTableViewCell: UITableViewCell {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        avatar.layer.borderColor = UIColor.main.cgColor
+        switch previousTraitCollection?.userInterfaceStyle {
+        case .light, .unspecified:
+            avatar.layer.borderWidth = 0
+        case .dark:
+            avatar.layer.borderWidth = 1
+            avatar.layer.borderColor = UIColor.main.cgColor
+        default:
+            return
+            // dark mode detected
+        }
     }
 }
