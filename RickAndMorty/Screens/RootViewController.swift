@@ -30,9 +30,9 @@ final class RootViewController : UITabBarController {
           UITabBar.appearance().shadowImage = UIImage()
           UITabBar.appearance().backgroundImage = UIImage()
           viewControllers = [
-              createNavigController(for: mainViewController, image: UIImage(named: "Home")!),
+              createNavigController(for: mainViewController, image: UIImage(named: "Home")!, selectedImage: UIImage(named: "Home_s")!),
               createNavigController(for: favouriteViewController, image: UIImage(named: "Favourite")!, selectedImage: UIImage(named: "Favourite_s")!),
-              createNavigController(for: searchViewController, image: UIImage(named: "Search")!)
+              createNavigController(for: searchViewController, image: UIImage(named: "Search")!, selectedImage: UIImage(named: "Search_s")!)
           ]
           tabBar.backgroundColor = .bg
       }
