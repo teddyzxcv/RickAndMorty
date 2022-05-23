@@ -109,8 +109,6 @@ extension FavouriteViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.separatorColor = .main
         let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteTableViewCell.identifier, for: indexPath) as! FavouriteTableViewCell
-        print(indexPath.row)
-        print(favouriteCharacters.count)
         cell.update(favouriteCharacters[indexPath.row])
         return cell
     }

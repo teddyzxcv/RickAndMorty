@@ -69,24 +69,9 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
     func setCurrentMaxandMinZoomScale() {
         let boundsSize = self.bounds.size
         let imageSize = imageZoomView.bounds.size
-        
         let xScale = boundsSize.width / imageSize.width
-        let yScale = boundsSize.height / imageSize.height
-        let minScale = min(xScale, yScale)
-        
-        var maxScale: CGFloat = 1.0
-        if minScale < 0.1 {
-            maxScale = 0.3
-        }
-        if minScale >= 0.1 && minScale < 0.5 {
-            maxScale = 0.7
-        }
-        if minScale >= 0.5 {
-            maxScale = max(3.0, minScale)
-        }
-        
-        self.minimumZoomScale = minScale
-        self.maximumZoomScale = maxScale
+        self.minimumZoomScale = xScale
+        self.maximumZoomScale = 3
     }
     
     func centerImage() {
@@ -113,7 +98,7 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
         let minScale = self.minimumZoomScale
         let maxScale = self.maximumZoomScale
         
-        if (minScale == maxScale && minScale > 1) {
+        if (minScale == maxScale) {
             return
         }
         
