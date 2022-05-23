@@ -11,7 +11,7 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
     
     // MARK: Fields
     var imageZoomView: UIImageView!
-    
+        
     lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
         zoomingTap.numberOfTapsRequired = 2
@@ -21,7 +21,7 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
     // MARK: Initializers.
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        self.backgroundColor = .bg
         self.delegate = self
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
@@ -88,7 +88,11 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
         } else {
             frameToCenter.origin.x = 0
         }
-        frameToCenter.origin.y = 0
+        if frameToCenter.size.height < boundsSize.height {
+            frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2
+        } else {
+            frameToCenter.origin.y = 0
+        }
         imageZoomView.frame = frameToCenter
     }
     
@@ -131,6 +135,10 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
         return self.imageZoomView
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.animatableData)
+    }
+        
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         self.centerImage()
     }
