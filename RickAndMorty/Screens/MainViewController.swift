@@ -98,6 +98,7 @@ class MainViewController: UIViewController {
         topImageContraint.constant = 45.5
         UIView.animate(withDuration: 0.4, animations: { [self] in
             self.view.layoutIfNeeded()
+            imageZoomScrollView.imageUnzoomable()
         }, completion: { checker in
             guard checker else { return }
         })
@@ -111,6 +112,7 @@ class MainViewController: UIViewController {
         topImageContraint.constant = 0 - bookLabel.frame.height - titleLabel.frame.height - 24 - self.view.safeAreaInsets.top
         UIView.animate(withDuration: 0.4, animations: { [self] in
             self.view.layoutIfNeeded()
+            imageZoomScrollView.setCurrentMaxandMinZoomScale()
         }, completion: { checker in
             guard checker else { return }
         })

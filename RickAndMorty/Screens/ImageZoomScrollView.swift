@@ -8,7 +8,7 @@
 import UIKit
 
 class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
-
+    
     // MARK: Fields
     var imageZoomView: UIImageView!
     
@@ -44,9 +44,9 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
             imageZoomView.topAnchor.constraint(equalTo: self.topAnchor),
             imageZoomView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             imageZoomView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
-
+            
         ])
-
+        
     }
     
     func configurateFor(imageSize: CGSize) {
@@ -57,13 +57,18 @@ class ImageZoomScrollView: UIScrollView, UIScrollViewDelegate {
         
         self.imageZoomView.addGestureRecognizer(self.zoomingTap)
         self.imageZoomView.isUserInteractionEnabled = true
-
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         self.centerImage()
+    }
+    
+    func imageUnzoomable() {
+        self.maximumZoomScale = self.minimumZoomScale
+        self.zoomScale = self.minimumZoomScale
     }
     
     func setCurrentMaxandMinZoomScale() {

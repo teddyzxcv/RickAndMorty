@@ -98,7 +98,6 @@
 				6D84B170281860B200B63912 /* Info.plist */,
 				6DB432F028331B5D00333DAC /* CharacterModel.swift */,
 				6D671F4628340FDF00141CB1 /* ImageLoader.swift */,
-				6DE33F46283913350031A73F /* ImageZoomScrollView.swift */,
 			);
 			path = RickAndMorty;
 			sourceTree = "<group>";
@@ -109,6 +108,7 @@
 				6D088D24282C25EC00BD70DC /* RootViewController.swift */,
 				6D84B1842818634900B63912 /* Table */,
 				6D84B17A281861F600B63912 /* Character */,
+				6DE33F46283913350031A73F /* ImageZoomScrollView.swift */,
 				6DB432DD2832BEDC00333DAC /* MainViewController.swift */,
 				6D671F442833EC8000141CB1 /* FavouriteViewController.swift */,
 				6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */,
