@@ -129,10 +129,16 @@ extension SearchTableViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         changeRecentTabelCellStatus()
+        var placeHolderFont = UIFont(name: "SFUIText-Semibold", size: 18)
+        placeHolderFont = UIFont.systemFont(ofSize: 18, weight: .regular)
+        searchBarView.attributedPlaceholder = NSMutableAttributedString(string: "Search for character", attributes: [NSAttributedString.Key.font : placeHolderFont!, NSAttributedString.Key.foregroundColor : UIColor.main,])
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         changeRecentTabelCellStatus()
+        var placeHolderFont = UIFont(name: "SFUIText-Semibold", size: 18)
+        placeHolderFont = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        searchBarView.attributedPlaceholder = NSMutableAttributedString(string: "Search for character", attributes: [NSAttributedString.Key.font : placeHolderFont!, NSAttributedString.Key.foregroundColor : UIColor.secondary,])
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -68,6 +68,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D238516283D2D2F004B4EA0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6DE33F46283913350031A73F /* ImageZoomScrollView.swift */,
+				6DB432DD2832BEDC00333DAC /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		6D238517283D2D43004B4EA0 /* Favourite */ = {
+			isa = PBXGroup;
+			children = (
+				6D671F442833EC8000141CB1 /* FavouriteViewController.swift */,
+				6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */,
+			);
+			path = Favourite;
+			sourceTree = "<group>";
+		};
 		6D84B156281860B100B63912 = {
 			isa = PBXGroup;
 			children = (
@@ -106,12 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				6D088D24282C25EC00BD70DC /* RootViewController.swift */,
-				6D84B1842818634900B63912 /* Table */,
+				6D238517283D2D43004B4EA0 /* Favourite */,
+				6D238516283D2D2F004B4EA0 /* Main */,
+				6D84B1842818634900B63912 /* Search */,
 				6D84B17A281861F600B63912 /* Character */,
-				6DE33F46283913350031A73F /* ImageZoomScrollView.swift */,
-				6DB432DD2832BEDC00333DAC /* MainViewController.swift */,
-				6D671F442833EC8000141CB1 /* FavouriteViewController.swift */,
-				6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -140,7 +156,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6D84B1842818634900B63912 /* Table */ = {
+		6D84B1842818634900B63912 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				6D84B1852818635900B63912 /* SearchTableViewController.swift */,
@@ -148,7 +164,7 @@
 				6D671F492835AB0F00141CB1 /* SearchBarView.swift */,
 				6D671F4B2835C38B00141CB1 /* CharacterTableViewCell.swift */,
 			);
-			path = Table;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		6DB432DF2832C1C400333DAC /* fonts */ = {
