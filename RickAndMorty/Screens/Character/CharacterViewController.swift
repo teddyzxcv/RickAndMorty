@@ -17,6 +17,7 @@ final class CharacterViewController: UIViewController, Sendable {
         let ret = UIImageView()
         ret.layer.cornerRadius = 10
         ret.layer.masksToBounds = true
+        ret.layer.borderWidth = 1
         ret.contentMode = .scaleAspectFill
         return ret
     }()
@@ -89,6 +90,19 @@ final class CharacterViewController: UIViewController, Sendable {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+               switch previousTraitCollection?.userInterfaceStyle {
+               case .light, .unspecified:
+                   icon.layer.borderWidth = 0
+               case .dark:
+                   icon.layer.borderWidth = 1
+                   icon.layer.borderColor = UIColor.main.cgColor
+               default:
+                   return
+               }
     }
     
     // MARK: View life cycle
@@ -224,8 +238,8 @@ final class CharacterViewController: UIViewController, Sendable {
             nameAndButtonView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             nameAndButtonView.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 35),
             infoTableView.topAnchor.constraint(equalTo: nameAndButtonView.bottomAnchor, constant: 20),
-            infoTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            infoTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            infoTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            infoTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             infoTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         favouriteButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)

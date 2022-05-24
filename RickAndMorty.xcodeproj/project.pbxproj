@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D088D25282C25EC00BD70DC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D088D24282C25EC00BD70DC /* RootViewController.swift */; };
 		6D23851528395175004B4EA0 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */; };
+		6D23854D283D46F9004B4EA0 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D23854C283D46F9004B4EA0 /* CharacterView.swift */; };
 		6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F442833EC8000141CB1 /* FavouriteViewController.swift */; };
 		6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F4628340FDF00141CB1 /* ImageLoader.swift */; };
 		6D671F4A2835AB0F00141CB1 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D671F492835AB0F00141CB1 /* SearchBarView.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		6D088D24282C25EC00BD70DC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		6D23851428395175004B4EA0 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		6D23854C283D46F9004B4EA0 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		6D671F442833EC8000141CB1 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		6D671F4628340FDF00141CB1 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		6D671F482835A41900141CB1 /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				6D84B17B2818621100B63912 /* CharacterInfoView.swift */,
 				6D84B17C2818621100B63912 /* CharacterViewController.swift */,
+				6D23854C283D46F9004B4EA0 /* CharacterView.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				6D671F4C2835C38B00141CB1 /* CharacterTableViewCell.swift in Sources */,
 				6DB432F128331B5D00333DAC /* CharacterModel.swift in Sources */,
 				6D671F4728340FDF00141CB1 /* ImageLoader.swift in Sources */,
+				6D23854D283D46F9004B4EA0 /* CharacterView.swift in Sources */,
 				6D671F452833EC8000141CB1 /* FavouriteViewController.swift in Sources */,
 				6D84B1882818655100B63912 /* SearchTableView.swift in Sources */,
 				6D84B1862818635900B63912 /* SearchTableViewController.swift in Sources */,

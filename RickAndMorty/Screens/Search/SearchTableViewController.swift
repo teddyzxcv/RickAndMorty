@@ -81,12 +81,14 @@ class SearchTableViewController: UIViewController, Sendable {
     }
 }
 
+// TODO: Change back viewcontroller
 extension SearchTableViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard searchedCharacters.count > 0 else { return }
         let character = searchedCharacters[indexPath.row]
         let vc = CharacterViewController(characterModel: character)
         vc.modalPresentationStyle = .overFullScreen
+//        let vc = UIHostingController(rootView: CharacterView(data: character))
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
