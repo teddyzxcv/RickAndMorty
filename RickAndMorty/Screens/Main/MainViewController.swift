@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
-    let titleLabel = UILabel()
+    private let titleLabel = UILabel()
     
-    let bookLabel = UILabel()
+    private let bookLabel = UILabel()
     
-    var imageZoomScrollView: ImageZoomScrollView!
+    private var imageZoomScrollView: ImageZoomScrollView!
     
-    var isImageOpened = false
+    private var isImageOpened = false
     
-    let closeButton = UIButton()
+    private let closeButton = UIButton()
     
-    var topImageContraint = NSLayoutConstraint()
+    private var topImageContraint = NSLayoutConstraint()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ class MainViewController: UIViewController {
         imageZoomScrollView.isUserInteractionEnabled = true
     }
     
-    func setView() {
+    private func setView() {
         bookLabel.frame = CGRect(x: 0, y: 0, width: 343, height: 100)
         bookLabel.backgroundColor = .bg
         
@@ -94,7 +94,7 @@ class MainViewController: UIViewController {
         ])
     }
     
-    @objc func closeImageTapped(sender: UIButton) {
+    @objc private func closeImageTapped(sender: UIButton) {
         topImageContraint.constant = 45.5
         UIView.animate(withDuration: 0.4, animations: { [self] in
             self.view.layoutIfNeeded()
@@ -106,7 +106,7 @@ class MainViewController: UIViewController {
         isImageOpened = !isImageOpened
     }
     
-    @objc func imageTapped(sender: UITapGestureRecognizer) {
+    @objc private func imageTapped(sender: UITapGestureRecognizer) {
         self.view.bringSubviewToFront(closeButton)
         guard sender.state == .ended && !isImageOpened else { return }
         topImageContraint.constant = 0 - bookLabel.frame.height - titleLabel.frame.height - 24 - self.view.safeAreaInsets.top

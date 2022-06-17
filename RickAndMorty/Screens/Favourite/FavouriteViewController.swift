@@ -7,26 +7,27 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
-class FavouriteViewController: UIViewController, Sendable {
-    let tableView = UITableView()
+final class FavouriteViewController: UIViewController, Sendable {
+    private let tableView = UITableView()
     
-    let noResultView = UILabel()
+    private let noResultView = UILabel()
     
-    var favouriteCharacters = [CharacterModel]()
+    private var favouriteCharacters = [CharacterModel]()
     
-    func loadFavouriteCharacters(_ ids: [Int]) {
+    private func loadFavouriteCharacters(_ ids: [Int]) {
         guard !ids.isEmpty else {
             tableView.reloadData()
             return
         }
         Task {
             for id in ids {
-                guard let characterURL = ImageLoader.getCharacterURLbyID(id) else {continue}
+                guard let characterURL = ImageUtil.getCharacterURLbyID(id) else {continue}
                 do {
-                    if let character = try await CharacterLoader().loadCharacter(characterURL) {
-                        self.favouriteCharacters.append(character)
-                    }
+                    let character = try await CharacterLoader().loadCharacter(characterURL)
+                    self.favouriteCharacters.append(character)
+                    
                 } catch {
                 }
             }
@@ -69,14 +70,15 @@ class FavouriteViewController: UIViewController, Sendable {
 extension FavouriteViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard favouriteCharacters.count > 0 else { return }
-        let vc = CharacterViewController(characterModel: favouriteCharacters[indexPath.row])
-        vc.modalPresentationStyle = .overFullScreen
+//        let vc = CharacterViewController(characterModel: favouriteCharacters[indexPath.row])
+//        vc.modalPresentationStyle = .overFullScreen
+        let vc = UIHostingController(rootView: CharacterView(data: favouriteCharacters[indexPath.row]))
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension FavouriteViewController: UITableViewDataSource{
-    func setUpNotResultView(_ view: UILabel) {
+    private func setUpNotResultView(_ view: UILabel) {
         view.textColor = .secondary
 
         view.backgroundColor = .bg

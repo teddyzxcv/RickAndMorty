@@ -67,9 +67,8 @@ final class CharacterViewController: UIViewController, Sendable {
         guard let characterURL = urlComp.url else {return}
         Task {
             do {
-                if let character = try await CharacterLoader().loadCharacter(characterURL) {
-                    self.characterModel = character
-                }
+                let character = try await CharacterLoader().loadCharacter(characterURL)
+                self.characterModel = character
             } catch {
             }
         }

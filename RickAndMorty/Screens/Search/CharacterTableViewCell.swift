@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CharacterTableViewCell: UITableViewCell {
+final class CharacterTableViewCell: UITableViewCell {
     struct Model {
         let url: URL
     }

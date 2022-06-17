@@ -8,33 +8,20 @@
 import Foundation
 import UIKit
 
-class FavouriteTableViewCell: UITableViewCell {
+final class FavouriteTableViewCell: UITableViewCell {
     struct Model {
         let url: URL
     }
     
-    static let identifier = "FavouriteTableViewCell"
+    static public let identifier = "FavouriteTableViewCell"
     
-    var avatar = UIImageView()
+    private var avatar = UIImageView()
     
-    let nameLabel = UILabel()
+    private let nameLabel = UILabel()
         
-    let infoView = UIView()
+    private let infoView = UIView()
     
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .bg
-        self.contentView.backgroundColor = .bg
-        self.selectionStyle = .none
-        updateUI()
-    }
-    
-    override func updateConstraints() {
-        super.updateConstraints()
-    }
-    
-    func setUpInfoView() {
+    private func setUpInfoView() {
         contentView.addSubview(infoView)
         infoView.translatesAutoresizingMaskIntoConstraints = false
         infoView.setContentHuggingPriority(.defaultLow, for: .vertical)
@@ -72,7 +59,7 @@ class FavouriteTableViewCell: UITableViewCell {
             infoView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])    }
     
-    func setUpImageView() {
+    private func setUpImageView() {
         contentView.addSubview(avatar)
         avatar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -97,6 +84,16 @@ class FavouriteTableViewCell: UITableViewCell {
         }
     }
     
+    private func updateUI() {
+        setUpImageView()
+
+        setUpInfoView()
+        
+        NSLayoutConstraint.activate([
+            contentView.heightAnchor.constraint(equalToConstant: 159)
+        ])
+    }
+    
     func update(_ model: CharacterModel) {
         avatar.kf.setImage(with: model.image)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -108,14 +105,16 @@ class FavouriteTableViewCell: UITableViewCell {
         nameLabel.attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.kern: 0.35, NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
     
-    func updateUI() {
-        setUpImageView()
-
-        setUpInfoView()
-        
-        NSLayoutConstraint.activate([
-            contentView.heightAnchor.constraint(equalToConstant: 159)
-        ])
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .bg
+        self.contentView.backgroundColor = .bg
+        self.selectionStyle = .none
+        updateUI()
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
     }
     
     required init?(coder: NSCoder) {

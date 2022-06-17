@@ -130,10 +130,6 @@ final class RecentCharacterTableCell: UITableViewCell {
     
     private lazy var recentLabel: UILabel = UILabel()
     
-    func updateUI() {
-        
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .bg

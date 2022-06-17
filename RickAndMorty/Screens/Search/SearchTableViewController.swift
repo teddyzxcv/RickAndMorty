@@ -10,24 +10,24 @@ import UIKit
 import CoreMedia
 import SwiftUI
 
-class SearchTableViewController: UIViewController, Sendable {
-    var pagesCount: Int = 0
+final class SearchTableViewController: UIViewController, Sendable {
+    private var pagesCount: Int = 0
     
-    var characterCount: Int = 0
+    private var characterCount: Int = 0
     
-    var nextPage: URL?
+    private var nextPage: URL?
     
-    var prevPage: URL?
+    private var prevPage: URL?
     
-    var searchedCharacters = [CharacterModel]()
+    private var searchedCharacters = [CharacterModel]()
     
-    var characterTask = Task{
+    private var characterTask = Task{
     }
-    let tableView: UITableView = UITableView()
+    private let tableView: UITableView = UITableView()
     
-    let searchBarView = SearchBarView()
+    private let searchBarView = SearchBarView()
     
-    var isStartEditing: Bool = false
+    private var isStartEditing: Bool = false
     
     private func changeRecentTabelCellStatus() {
         isStartEditing = !isStartEditing
@@ -91,6 +91,7 @@ extension SearchTableViewController: UITableViewDelegate{
 //        let vc = UIHostingController(rootView: CharacterView(data: character))
         navigationController?.pushViewController(vc, animated: true)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        CharacterStorage().appendCharacterTo(.favourite, character)
     }
     
 }
@@ -111,7 +112,7 @@ extension SearchTableViewController: UITableViewDataSource{
             var images = [URL]()
             let searchRecentCharacterID = UserDefaults.standard.array(forKey: "Recent characters") as? [Int]
             for i in searchRecentCharacterID?.reversed() ?? [Int]() {
-                images.append(ImageLoader.getImageURLbyID(i)!)
+                images.append(ImageUtil.getImageURLbyID(i)!)
             }
             cell.update(RecentCharacterTableCell.Model(
                 imageurls: images,
